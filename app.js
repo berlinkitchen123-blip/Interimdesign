@@ -1,3 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCUdWUxt-j63v-Dkcrauy32cbe7EvYHRZA",
+    authDomain: "shruti-9c12b.firebaseapp.com",
+    databaseURL: "https://shruti-9c12b-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "shruti-9c12b",
+    storageBucket: "shruti-9c12b.firebasestorage.app",
+    messagingSenderId: "575863583929",
+    appId: "1:575863583929:web:fb108edeceb85589a9d768"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+console.log("Firebase Initialized:", app);
+
 document.addEventListener('DOMContentLoaded', () => {
     // Elements
     const uploadArea = document.getElementById('upload-area');
