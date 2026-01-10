@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKSPACE PRO | Structural Geometry Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Critical Fallback CSS */
+        body {
+            background-color: #020617;
+            /* slate-950 */
+            color: #e2e8f0;
+            /* slate-200 */
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151b2e',
+                            900: '#0f172a',
+                            950: '#020617',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body
+    class="bg-slate-950 text-slate-200 min-h-screen font-sans selection:bg-indigo-500/30 selection:text-indigo-200 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav
+        class="h-16 border-b border-white/5 bg-slate-950/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-40">
+        <div class="flex items-center gap-4">
+            <div
+                class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-[0_0_20px_rgba(79,70,229,0.5)]">
+                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-lg font-black tracking-tight text-white leading-none">WORKSPACE <span
+                        class="text-indigo-500">PRO</span></h1>
+                <p class="text-[10px] font-mono text-slate-500 tracking-wider">STRUCTURAL GEOMETRY ENGINE</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-2 px-3 py-1.5 bg-slate-900 rounded-full border border-slate-800">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">System Online</span>
+            </div>
+            <span class="text-[10px] font-mono text-slate-600">v.2.4.0 [BETA]</span>
+        </div>
+    </nav>
+
+    <main class="max-w-[1600px] mx-auto p-4 lg:p-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- Sidebar: Config -->
+            <div class="lg:col-span-3 space-y-6">
+                <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm">
+                    <h2
+                        class="text-xs font-black uppercase tracking-[0.2em] text-slate-500 mb-6 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Settings & Config
+                    </h2>
+
+                    <div class="space-y-5">
+                        <div class="space-y-2">
+                            <label
+                                class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block ml-1">Architectural
+                                Style</label>
+                            <select id="style-select"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm font-medium text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-inner">
+                                <option>Modern Minimalist</option>
+                                <option>Industrial Loft</option>
+                                <option>Scandinavian</option>
+                                <option>Luxury Contemporary</option>
+                                <option>Mid-Century Modern</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block ml-1">Room
+                                Classification</label>
+                            <select id="room-select"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm font-medium text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-inner">
+                                <option>Living Room</option>
+                                <option>Kitchen & Dining</option>
+                                <option>Master Bedroom</option>
+                                <option>Office / Workspace</option>
+                                <option>Bathroom</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label
+                                class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block ml-1">Global
+                                Illumination</label>
+                            <select id="lighting-select"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm font-medium text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-inner">
+                                <option>Natural Daylight (Sunny)</option>
+                                <option>Golden Hour (Warm)</option>
+                                <option>Evening Ambience</option>
+                                <option>Studio Softbox</option>
+                            </select>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/50">
+                            <button id="generate-btn" disabled
+                                class="w-full group relative py-4 px-6 rounded-xl bg-slate-800 text-slate-500 font-bold uppercase tracking-widest text-xs transition-all overflow-hidden disabled:cursor-not-allowed hover:enabled:bg-indigo-600 hover:enabled:text-white hover:enabled:shadow-[0_0_30px_rgba(79,70,229,0.4)] hover:enabled:-translate-y-0.5 active:enabled:translate-y-0">
+                                <span class="relative z-10 flex items-center justify-center gap-2">
+                                    <span id="btn-text">Initializing...</span>
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-indigo-900/10 border border-indigo-500/20">
+                    <h3 class="text-indigo-400 font-bold uppercase text-[10px] tracking-widest mb-2">System Status</h3>
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                            <div class="w-[70%] h-full bg-indigo-500 rounded-full"></div>
+                        </div>
+                        <span class="text-[10px] font-mono text-indigo-300">GPU: 70%</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 leading-relaxed">Neural rendering engine is calibrated and
+                        ready for blueprint ingestion.</p>
+                </div>
+
+                <!-- API Key Config (Hidden/Advanced) -->
+                <div class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800 backdrop-blur-sm">
+                    <h3
+                        class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">
+                        Generative Core Config
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <label
+                                class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block ml-1">Render
+                                Engine</label>
+                            <select id="engine-select"
+                                class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm font-medium text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-inner">
+                                <option value="mock">Simulation Mode (Offline)</option>
+                                <option value="huggingface">HuggingFace ControlNet (Live)</option>
+                            </select>
+                        </div>
+
+                        <div id="api-key-container" class="hidden space-y-2 animate-in fade-in slide-in-from-top-2">
+                            <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block ml-1">
+                                API Token
+                                <a href="https://huggingface.co/settings/tokens" target="_blank"
+                                    class="text-indigo-400 hover:text-indigo-300 ml-1">(Get Free Token)</a>
+                            </label>
+                            <input type="password" id="api-key-input" placeholder="hf_..."
+                                class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-sm font-mono text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-inner placeholder:text-slate-700">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Workspace -->
+            <div class="lg:col-span-9 grid grid-cols-1 lg:grid-cols-2 gap-6 h-auto min-h-[500px] lg:h-[700px]">
+
+                <!-- Left: Blueprint Analysis -->
+                <div
+                    class="bg-black/20 rounded-2xl p-6 border border-slate-800/50 flex flex-col relative overflow-hidden group min-h-[300px]">
+                    <div
+                        class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-5 pointer-events-none">
+                    </div>
+
+                    <div class="flex justify-between items-center mb-6 relative z-10">
+                        <div class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+                            <h3 class="font-bold text-slate-400 uppercase text-[10px] tracking-widest">Blueprint
+                                Analysis</h3>
+                        </div>
+                        <span
+                            class="px-2 py-1 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-500">RAW_INPUT_MODE</span>
+                    </div>
+
+                    <div id="upload-area"
+                        class="flex-1 border-2 border-dashed border-slate-800 rounded-xl bg-slate-900/20 flex flex-col items-center justify-center relative transition-all hover:border-indigo-500/30 hover:bg-slate-900/40 cursor-pointer">
+                        <input type="file" id="file-input" class="hidden" accept=".jpg,.png,.pdf">
+
+                        <div id="upload-placeholder" class="text-center p-8 transition-all duration-300">
+                            <div
+                                class="w-16 h-16 mx-auto bg-slate-800 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl">
+                                <svg class="w-8 h-8 text-indigo-500" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Import Technical Drawing</h4>
+                            <p class="text-sm text-slate-500 max-w-[200px] mx-auto leading-relaxed">Drag & drop your
+                                floorplan (PDF, PNG, JPG) to begin analysis.</p>
+                        </div>
+
+                        <!-- Image Preview (Hidden by default) -->
+                        <div id="image-preview" class="hidden absolute inset-0 w-full h-full p-4">
+                            <div class="relative w-full h-full">
+                                <img id="uploaded-img" src=""
+                                    class="w-full h-full object-contain rounded-lg border border-slate-700 bg-black/50 relative z-10"
+                                    alt="Blueprint">
+                                <canvas id="analysis-canvas"
+                                    class="absolute inset-0 w-full h-full z-20 pointer-events-none mix-blend-screen"></canvas>
+                            </div>
+                            <button id="clear-btn"
+                                class="absolute top-6 right-6 z-30 p-2 bg-black/50 hover:bg-red-500/80 text-white rounded-lg backdrop-blur-md transition-colors border border-white/10">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Report (Hidden by default) -->
+                    <div id="analysis-panel"
+                        class="hidden mt-6 bg-slate-900/50 rounded-xl p-4 border border-slate-800/50">
+                        <h4
+                            class="text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                            <span class="w-1 h-1 bg-indigo-400 rounded-full"></span>
+                            Spatial Skeleton Report
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-black/20 p-3 rounded-lg border border-slate-800/50">
+                                <span class="text-[10px] text-slate-500 block mb-1">Detected Vertices</span>
+                                <span class="text-lg font-mono font-bold text-white tracking-tight">142</span>
+                            </div>
+                            <div class="bg-black/20 p-3 rounded-lg border border-slate-800/50">
+                                <span class="text-[10px] text-slate-500 block mb-1">Surface Area</span>
+                                <span class="text-lg font-mono font-bold text-white tracking-tight">845<span
+                                        class="text-xs text-slate-600 ml-1">SQ.FT</span></span>
+                            </div>
+                        </div>
+                        <div class="mt-3 flex items-center gap-2">
+                            <div class="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
+                                <div class="w-full h-full bg-indigo-500/50 animate-progress"></div>
+                            </div>
+                            <span
+                                class="text-[9px] font-mono text-indigo-400 animate-pulse">AUDITING_BLUEPRINT_ARCH...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Render Output -->
+                <div
+                    class="bg-black/40 backdrop-blur-xl rounded-2xl p-6 border border-slate-800/50 shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col relative group min-h-[300px]">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                            <h3 class="font-bold text-slate-400 uppercase text-[10px] tracking-widest">3D Spatial
+                                Extrusion</h3>
+                        </div>
+                        <div id="hd-badge" class="hidden text-[10px] font-mono text-slate-500 tracking-tighter">HD
+                            RENDER READY</div>
+                    </div>
+
+                    <div id="render-content" class="flex-1 flex flex-col items-center justify-center relative">
+                        <!-- State: Empty -->
+                        <div id="render-empty" class="opacity-20 text-center px-12 grayscale">
+                            <svg class="w-32 h-32 mb-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="0.5"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            <p class="text-sm font-bold uppercase tracking-[0.3em]">Awaiting Geometry Report</p>
+                        </div>
+
+                        <!-- State: Generating -->
+                        <div id="render-loading" class="hidden flex flex-col items-center justify-center text-center">
+                            <div class="relative w-32 h-32 mb-8">
+                                <div class="absolute inset-0 border-[1px] border-indigo-500/20 rounded-full"></div>
+                                <div
+                                    class="absolute inset-0 border-[1px] border-indigo-500 rounded-full border-t-transparent animate-[spin_0.8s_linear_infinite]">
+                                </div>
+                                <div
+                                    class="absolute inset-4 border-[1px] border-indigo-400/10 rounded-full animate-pulse">
+                                </div>
+                            </div>
+                            <h4 class="text-lg font-black tracking-widest uppercase text-white">Extruding Walls</h4>
+                            <p class="text-slate-500 text-[10px] mt-2 font-mono uppercase">Applying coordinate-locked
+                                path tracing...</p>
+                        </div>
+
+                        <!-- State: Result -->
+                        <div id="render-result" class="hidden w-full h-full flex flex-col">
+                            <div
+                                class="flex-1 rounded-xl overflow-hidden shadow-2xl bg-black cursor-zoom-in group relative border border-slate-800">
+                                <img id="result-img" src="" alt="AI Render"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div
+                                    class="absolute inset-0 bg-black/0 group-hover:bg-indigo-900/10 transition-colors flex items-center justify-center pointer-events-none">
+                                    <div
+                                        class="opacity-0 group-hover:opacity-100 bg-white/10 backdrop-blur-xl p-4 rounded-full border border-white/20 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-8 flex items-end justify-between">
+                                <div class="max-w-[70%]">
+                                    <p
+                                        class="text-slate-400 text-[11px] leading-relaxed font-medium uppercase tracking-wider italic">
+                                        "Structure extruded via Blueprint fidelity logic. Material mapping synchronized
+                                        with detected room zones."
+                                    </p>
+                                </div>
+                                <button
+                                    class="px-6 py-3 bg-white text-black text-[10px] font-black transition-all rounded-lg shadow-xl uppercase tracking-widest hover:bg-indigo-400 hover:text-white active:scale-95">
+                                    Export HD PNG
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pro Tip Ticker -->
+        <div class="mt-8 flex gap-6 overflow-x-auto pb-4 custom-scrollbar">
+            <div
+                class="flex-shrink-0 w-72 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/50 flex flex-col gap-2">
+                <span class="text-[10px] font-mono text-indigo-500 font-bold tracking-tighter">G-01</span>
+                <p class="text-xs font-black text-white uppercase tracking-widest">Geometric Locking</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed">Forcing the engine to treat black lines as
+                    structural bounds.</p>
+            </div>
+            <div
+                class="flex-shrink-0 w-72 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/50 flex flex-col gap-2">
+                <span class="text-[10px] font-mono text-indigo-500 font-bold tracking-tighter">A-02</span>
+                <p class="text-xs font-black text-white uppercase tracking-widest">Dual-Pass Render</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed">Separating structural analysis from aesthetic
+                    texturing.</p>
+            </div>
+            <div
+                class="flex-shrink-0 w-72 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/50 flex flex-col gap-2">
+                <span class="text-[10px] font-mono text-indigo-500 font-bold tracking-tighter">P-03</span>
+                <p class="text-xs font-black text-white uppercase tracking-widest">Perspective Accuracy</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed">Isometric and Wide Angle modes now align better
+                    with grid logic.</p>
+            </div>
+            <div
+                class="flex-shrink-0 w-72 bg-slate-900/40 p-5 rounded-2xl border border-slate-800/50 flex flex-col gap-2">
+                <span class="text-[10px] font-mono text-indigo-500 font-bold tracking-tighter">M-04</span>
+                <p class="text-xs font-black text-white uppercase tracking-widest">Spatial Flow</p>
+                <p class="text-[10px] text-slate-500 leading-relaxed">Detects door swing arcs to prevent furniture
+                    overlap.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal for Preview -->
+    <div id="preview-modal"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 animate-in fade-in duration-500">
+        <div class="relative w-full h-full flex flex-col items-center justify-center">
+            <button id="close-modal"
+                class="absolute top-8 right-8 z-50 p-4 bg-white/5 hover:bg-white/10 rounded-full text-white transition-all border border-white/10 group cursor-pointer">
+                <svg class="w-6 h-6 group-hover:rotate-90 transition-transform" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div
+                class="relative max-w-[95vw] max-h-[85vh] rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.8)] border border-white/5">
+                <img id="modal-img" src="" class="w-full h-full object-contain" alt="Preview">
+            </div>
+
+            <div class="mt-12 flex gap-4">
+                <button
+                    class="px-10 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-2xl shadow-[0_10px_30px_rgba(79,70,229,0.3)] flex items-center gap-3 transition-all active:scale-95 uppercase tracking-[0.2em] text-xs">
+                    Download Render
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            console.error("Global Error:", msg, url, lineNo);
+            // Only alert if it's likely to cause a blank screen or major failure
+            if (msg.toLowerCase().includes('script error') || msg.toLowerCase().includes('cannot read property')) {
+                // alert('System Error: ' + msg); // Optional: uncomment if needed
+            }
+            return false;
+        };
+    </script>
+</body>
+
+</html>
