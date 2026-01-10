@@ -121,13 +121,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Look for patterns like 10'6", 12ft, 3.5m
         const ftMatch = text.match(/(\d+)'/);
         const mMatch = text.match(/(\d+)[mM]/);
+        const unitSelect = document.getElementById('unit-select');
 
         if (ftMatch || text.includes("ft") || text.includes("FEET")) {
             detectedDims.unit = "IMPERIAL (Feet)";
+            if (unitSelect) unitSelect.value = 'ft';
         } else if (mMatch || text.includes("mm") || text.includes("cm")) {
             detectedDims.unit = "METRIC (Meters)";
+            if (unitSelect) unitSelect.value = 'm';
         } else {
             detectedDims.unit = "Standard Unit";
+            // Default to feet if unsure, or leave as is
         }
 
         console.log("Detected Unit:", detectedDims.unit);
@@ -216,15 +220,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const style = document.getElementById('style-select').value;
         const lighting = document.getElementById('lighting-select').value;
         const roomContext = document.getElementById('room-select').value;
+        const unit = document.getElementById('unit-select').value;
 
         // Construct a highly specific prompt based on OCR and User Input
         const ocrSnippet = detectedTextContext.substring(0, 100); // usage limit
 
+        // Handle height based on unit
+        let heightPrompt = "Walls are exactly 12 feet high";
+        if (unit === 'm') {
+            heightPrompt = "Walls are exactly 3.66 meters high"; // 12ft ~ 3.66m
+        }
+
         const prompt = `Architectural plan to perspective render: ${style} style, ${roomContext}, ${lighting}. 
-        Walls are exactly 12 feet high. 
+        ${heightPrompt}. Unit scale: ${unit === 'm' ? 'Metric' : 'Imperial'}.
         Match the exact floorplan layout: ${ocrSnippet}. 
         Top-down orthographic view, photorealistic, 8k, unreal engine 5, interior design visualization. 
-        Volumetric lighting, sharp details, accurate scale.`;
+        Volumetric lighting, sharp details, accurate scale.${unit === 'm' ? ' Metric measurements.' : ''}`;
 
         // Using a model good at Image-to-Image with structure
         // 'runwayml/stable-diffusion-v1-5' is reliable for img2img on HF Inference
