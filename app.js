@@ -255,9 +255,8 @@ document.addEventListener('DOMContentLoaded', () => {
         Top-down orthographic view, photorealistic, 8k, unreal engine 5, interior design visualization. 
         Volumetric lighting, sharp details, accurate scale.${unit === 'm' ? ' Metric measurements.' : ''}`;
 
-        // Using a model good at Image-to-Image with structure
-        // 'runwayml/stable-diffusion-v1-5' is reliable for img2img on HF Inference
-        const modelId = "runwayml/stable-diffusion-v1-5";
+        // Using a reliable model on the standard Inference API
+        const modelId = "stabilityai/stable-diffusion-xl-base-1.0";
 
         // Convert base64 img to Blob
         const response = await fetch(uploadedImg.src);
