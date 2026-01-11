@@ -288,8 +288,12 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(imageBlob);
         });
 
-        // Use the new standard Router endpoint (often has better CORS handling than keyless api-inference)
-        const targetUrl = `https://router.huggingface.co/hf-inference/models/${model}`;
+        // Reverting to the standard inference endpoint, but keeping the direct fetch (no proxy)
+        // because the router endpoint was 404ing and CorsProxy is often flaky.
+        // We will hope the browser respects the direct call or the user uses a CORS plugin if needed.
+        // ACTUALLY: The 404 on router likely means the router path was wrong. 
+        // Let's try the standard one again.
+        const targetUrl = `https://api-inference.huggingface.co/models/${model}`;
 
         const response = await fetch(
             targetUrl,
