@@ -288,12 +288,11 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(imageBlob);
         });
 
-        // Use a CORS proxy to bypass browser restrictions
-        const proxyUrl = 'https://corsproxy.io/?';
-        const targetUrl = `https://api-inference.huggingface.co/models/${model}`;
+        // Use the new standard Router endpoint (often has better CORS handling than keyless api-inference)
+        const targetUrl = `https://router.huggingface.co/hf-inference/models/${model}`;
 
         const response = await fetch(
-            proxyUrl + encodeURIComponent(targetUrl),
+            targetUrl,
             {
                 method: "POST",
                 headers: {
