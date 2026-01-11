@@ -287,15 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(imageBlob);
         });
 
-        // Reverting to the standard inference endpoint, but keeping the direct fetch (no proxy)
-        // because the router endpoint was 404ing and CorsProxy is often flaky.
-        // We will hope the browser respects the direct call or the user uses a CORS plugin if needed.
-        // ACTUALLY: The 404 on router likely means the router path was wrong. 
-        // Let's try the standard one again.
+        const proxyUrl = 'https://corsproxy.io/?';
         const targetUrl = `https://api-inference.huggingface.co/models/${model}`;
 
         const response = await fetch(
-            targetUrl,
+            proxyUrl + encodeURIComponent(targetUrl),
             {
                 method: "POST",
                 headers: {
